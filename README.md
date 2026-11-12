@@ -6,8 +6,10 @@
 
 Sistema web para administrar campanhas de mídia paga de vários clientes em várias plataformas: cadastro de clientes e contas de anúncio, ciclo de vida das campanhas, lançamento diário de métrica, indicadores calculados, alertas automáticos e relatório exportável.
 
-Trabalho individual da AVA1 de **Projeto de Desenvolvimento de Software II**, Engenharia de Software, Centro Universitário Filadélfia (UNIFIL).
+Trabalho individual da AVA1 de **Projeto e Desenvolvimento de Sistema II** (EGS@1039), Engenharia de Software, Centro Universitário Filadélfia (UNIFIL).
 Aluno: **Guilherme Ramos Martins Alves**.
+
+Este repositório é a implementação. O mesmo projeto é entregue também em **Projeto e Desenvolvimento de Sistema I** (EGS@1038), que é a documentação: requisitos, casos de uso, diagrama de classes, DER, diagramas de atividade e um diagrama de sequência para cada caso de uso.
 
 Escolhi esse tema porque trabalho com gestão de tráfego pago. As regras que estão aqui não foram inventadas para o trabalho, são as que eu já tenho que controlar na planilha: teto de verba contratada, CPA acima do combinado, campanha ativa que parou de entregar e dia em que a plataforma gastou mais do que devia.
 
