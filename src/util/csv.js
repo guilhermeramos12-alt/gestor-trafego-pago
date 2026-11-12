@@ -66,6 +66,12 @@ export function lerCsv(texto) {
 
 // "1.234,56" e "1234.56" viram 1234.56. Texto vazio vira 0 porque planilha de
 // plataforma deixa célula em branco quando o dia não teve o evento.
+//
+// O caso chato é "13.102" sozinho: pode ser treze mil ou treze inteiros e cento
+// e dois milésimos. Resolvo pelo formato, igual o Excel faz na importação: se
+// todos os pontos vêm com exatamente três dígitos atrás, é separador de milhar.
+// Peguei isso rodando a planilha de teste, que tinha impressões assim e vinham
+// como 13,102 impressões em vez de 13.102.
 export function numeroBr(valor) {
   if (valor === null || valor === undefined || String(valor).trim() === '') return 0;
 
@@ -73,8 +79,13 @@ export function numeroBr(valor) {
   const temVirgula = texto.includes(',');
   const temPonto = texto.includes('.');
 
-  if (temVirgula && temPonto) texto = texto.replace(/\./g, '').replace(',', '.');
-  else if (temVirgula) texto = texto.replace(',', '.');
+  if (temVirgula && temPonto) {
+    texto = texto.replace(/\./g, '').replace(',', '.');
+  } else if (temVirgula) {
+    texto = texto.replace(',', '.');
+  } else if (temPonto && /^-?\d{1,3}(\.\d{3})+$/.test(texto)) {
+    texto = texto.replace(/\./g, '');
+  }
 
   const numero = Number(texto);
   return Number.isFinite(numero) ? numero : NaN;
