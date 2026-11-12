@@ -1,0 +1,20 @@
+{
+  "name": "gestor-trafego-pago",
+  "version": "1.0.0",
+  "description": "Gestor de campanhas de trafego pago - AVA1 de Projeto de Desenvolvimento de Software II (UNIFIL)",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "seed": "node src/db/seed.js",
+    "reset": "node src/db/seed.js --recriar",
+    "test": "node --test testes/"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
