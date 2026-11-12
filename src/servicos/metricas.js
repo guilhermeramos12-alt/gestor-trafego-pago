@@ -1,5 +1,5 @@
 import { obterBanco } from '../db/conexao.js';
-import { indicadores } from '../dominio/metricas.js';
+import { comIndicadores, indicadores } from '../dominio/metricas.js';
 import { validarPeriodoDaMetrica } from '../dominio/regras.js';
 import { conflito, erroDeValidacao, naoEncontrado, traduzirErroDoBanco } from '../util/erros.js';
 import { ehDataValida, hoje, validar } from '../util/validacao.js';
@@ -52,7 +52,7 @@ export function listar({ campanha_id = null, cliente_id = null, de = null, ate =
     )
     .all(...parametros, Number(limite));
 
-  return linhas.map((linha) => ({ ...linha, ...indicadores(linha) }));
+  return linhas.map((linha) => comIndicadores(linha));
 }
 
 export function obter(id) {

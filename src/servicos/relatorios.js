@@ -1,5 +1,5 @@
 import { obterBanco } from '../db/conexao.js';
-import { arredondar, diasNoMes, indicadores, ritmoDoContrato } from '../dominio/metricas.js';
+import { arredondar, comIndicadores, diasNoMes, ritmoDoContrato } from '../dominio/metricas.js';
 import { gerarCsv } from '../util/csv.js';
 import { hoje, somarDias } from '../util/validacao.js';
 import * as clientes from './clientes.js';
@@ -61,7 +61,7 @@ export function porCampanha({ de, ate, cliente_id = null, status = null, platafo
 
   return {
     periodo,
-    linhas: linhas.map((linha) => ({ ...linha, ...indicadores(linha) }))
+    linhas: linhas.map((linha) => comIndicadores(linha))
   };
 }
 
@@ -80,7 +80,7 @@ function totaisDoPeriodo({ de, ate, cliente_id = null }) {
     )
     .get(...parametros);
 
-  return { ...totais, ...indicadores(totais) };
+  return comIndicadores(totais);
 }
 
 export function painelDoCliente(clienteId, { de, ate } = {}) {
@@ -102,7 +102,7 @@ export function painelDoCliente(clienteId, { de, ate } = {}) {
         ORDER BY investimento DESC`
     )
     .all(periodo.de, periodo.ate, clienteId)
-    .map((linha) => ({ ...linha, ...indicadores(linha) }));
+    .map((linha) => comIndicadores(linha));
 
   const serieDiaria = db
     .prepare(
@@ -115,7 +115,7 @@ export function painelDoCliente(clienteId, { de, ate } = {}) {
         ORDER BY m.data`
     )
     .all(clienteId, periodo.de, periodo.ate)
-    .map((linha) => ({ ...linha, ...indicadores(linha) }));
+    .map((linha) => comIndicadores(linha));
 
   // Ritmo do contrato olha sempre o mês corrente, independente do filtro de
   // período da tela: o que estoura contrato é o mês, não a janela escolhida.
@@ -199,7 +199,7 @@ export function visaoGeral({ de, ate } = {}) {
         LIMIT 10`
     )
     .all(periodo.de, periodo.ate)
-    .map((linha) => ({ ...linha, ...indicadores(linha) }));
+    .map((linha) => comIndicadores(linha));
 
   return {
     periodo,

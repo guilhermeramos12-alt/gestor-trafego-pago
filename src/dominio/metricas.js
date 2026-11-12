@@ -33,6 +33,18 @@ export function indicadores(agregado) {
   };
 }
 
+// Soma de REAL no SQLite acumula resto binário: o investimento do TikTok saiu
+// como 1738.1299999999999 no CSV de exportação. Arredondo o dinheiro na saída,
+// junto dos indicadores, para a tela e o arquivo mostrarem a mesma coisa.
+export function comIndicadores(agregado) {
+  return {
+    ...agregado,
+    investimento: arredondar(Number(agregado?.investimento ?? 0)),
+    receita: arredondar(Number(agregado?.receita ?? 0)),
+    ...indicadores(agregado)
+  };
+}
+
 export function diasNoMes(data) {
   const [ano, mes] = data.split('-').map(Number);
   return new Date(Date.UTC(ano, mes, 0)).getUTCDate();
