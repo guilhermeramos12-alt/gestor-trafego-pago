@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { rotasDeClientes } from './clientes.js';
 import { rotasDeContas } from './contas.js';
+import { rotasDeCampanhas } from './campanhas.js';
 
 export const api = Router();
 
@@ -10,3 +11,4 @@ api.get('/saude', (_req, res) => {
 
 api.use('/clientes', rotasDeClientes);
 api.use('/contas', rotasDeContas);
+api.use('/campanhas', rotasDeCampanhas);
