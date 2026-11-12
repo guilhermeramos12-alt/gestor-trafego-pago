@@ -20,7 +20,7 @@ A única dependência de produção é o Express. Banco, runner de teste e tudo 
 ## Como rodar
 
 ```bash
-git clone https://github.com/<usuario>/gestor-trafego-pago.git
+git clone https://github.com/guilhermeramos12-alt/gestor-trafego-pago.git
 cd gestor-trafego-pago
 npm install
 npm start
