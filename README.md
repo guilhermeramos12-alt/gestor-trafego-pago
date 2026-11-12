@@ -1,5 +1,9 @@
 # Gestor de Tráfego Pago
 
+> **Pré-requisito: Node.js 22.13 ou mais novo.** O banco é SQLite pelo módulo `node:sqlite`, que já vem dentro do Node e funciona sem flag a partir dessa versão, e é por isso que não existe driver para compilar nem servidor de banco para instalar. Confira com `node --version`; em versão antiga o projeto para na hora com uma mensagem explicando o que fazer, em vez de quebrar no meio.
+>
+> Testado por mim na 22.13.0 e na 26.13.0, com os 81 testes passando nas duas.
+
 Sistema web para administrar campanhas de mídia paga de vários clientes em várias plataformas: cadastro de clientes e contas de anúncio, ciclo de vida das campanhas, lançamento diário de métrica, indicadores calculados, alertas automáticos e relatório exportável.
 
 Trabalho individual da AVA1 de **Projeto de Desenvolvimento de Software II**, Engenharia de Software, Centro Universitário Filadélfia (UNIFIL).
@@ -9,7 +13,9 @@ Escolhi esse tema porque trabalho com gestão de tráfego pago. As regras que es
 
 ## Precisa ter
 
-Só o Node.js, versão 22.5 ou mais nova (desenvolvi e testei na 26.13). O banco é SQLite pelo módulo `node:sqlite`, que já vem dentro do Node, então não tem driver nativo para compilar nem servidor de banco para instalar. A única dependência de produção é o Express.
+Só o Node.js, 22.13 ou mais novo. Desenvolvi na 26.13 e depois baixei a 22.13 e a 20.18 para conferir os dois lados: na 22.13 os 81 testes passam e a aplicação sobe igual, e na 20.18 o projeto para antes de qualquer coisa com a mensagem dizendo a versão encontrada, a necessária e o que fazer. O módulo `node:sqlite` aparece na 22.5, mas até a 22.12 só funciona com a flag `--experimental-sqlite`, e eu não queria que alguém tivesse que lembrar de flag para corrigir o trabalho.
+
+A única dependência de produção é o Express. Banco, runner de teste e tudo mais vem do próprio Node.
 
 ## Como rodar
 
@@ -104,6 +110,8 @@ A camada de domínio existe para as contas e as regras serem testadas sem subir 
 ```bash
 npm test
 ```
+
+O script lista os quatro arquivos um por um de propósito: `node --test testes/` só descobre a pasta sozinho em versões mais novas, e na 22.13 isso falhava com "Cannot find module". Descobri rodando o projeto na versão mínima que eu declarei.
 
 81 testes em 4 arquivos (22 de domínio, 20 de cadastro, 21 de regra de negócio e 18 de alerta e relatório), todos contra SQLite em memória (`DB_PATH=:memory:`), sem mock de banco. Cobrem os cálculos de indicador com divisão por zero, as transições de status, o teto de verba, o upsert de métrica, a coerência dos números do dia, a leitura de CSV em formato brasileiro, as quatro regras de alerta com idempotência e o fechamento dos relatórios.
 

@@ -6,3 +6,9 @@ dados/*.db-shm
 .env
 .DS_Store
 Thumbs.db
+
+# cinto de seguranca: nada do apoio da faculdade entra aqui
+_canvas/
+_ferramentas/
+perfil-navegador/
+levantamento.json
