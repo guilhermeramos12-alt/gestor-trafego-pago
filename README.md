@@ -105,7 +105,7 @@ A camada de domínio existe para as contas e as regras serem testadas sem subir 
 npm test
 ```
 
-81 testes em 5 arquivos, todos contra SQLite em memória (`DB_PATH=:memory:`), sem mock de banco. Cobrem os cálculos de indicador com divisão por zero, as transições de status, o teto de verba, o upsert de métrica, a coerência dos números do dia, a leitura de CSV em formato brasileiro, as quatro regras de alerta com idempotência e o fechamento dos relatórios.
+81 testes em 4 arquivos (22 de domínio, 20 de cadastro, 21 de regra de negócio e 18 de alerta e relatório), todos contra SQLite em memória (`DB_PATH=:memory:`), sem mock de banco. Cobrem os cálculos de indicador com divisão por zero, as transições de status, o teto de verba, o upsert de métrica, a coerência dos números do dia, a leitura de CSV em formato brasileiro, as quatro regras de alerta com idempotência e o fechamento dos relatórios.
 
 ## O que ficou de fora
 

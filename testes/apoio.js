@@ -1,6 +1,6 @@
 // Todo teste roda contra um SQLite em memória. Precisa ser definido antes de
-// qualquer import de src/, porque conexao.js lê DB_PATH quando é carregado —
-// por isso os imports abaixo são dinâmicos e este arquivo usa await no topo.
+// qualquer import de src/, porque conexao.js lê DB_PATH quando é carregado.
+// Por isso os imports abaixo são dinâmicos e este arquivo usa await no topo.
 process.env.DB_PATH = ':memory:';
 
 export const conexao = await import('../src/db/conexao.js');
